@@ -32,7 +32,7 @@
                          x-on:keydown="$event.preventDefault()"
                          dusk="tallstackui_date_input"
                          class="cursor-pointer caret-transparent">
-        <x-slot:suffix>
+        <x-slot:suffix class="ml-1 mr-2">
             <div class="{{ $personalize['icon.wrapper'] }}">
                 <button type="button" x-on:click="clear()" x-show="quantity > 0" {{ $attributes->only('x-on:clear') }} dusk="tallstackui_date_clear">
                     <x-dynamic-component :component="TallStackUi::prefix('icon')"

@@ -28,7 +28,7 @@
                          x-on:keydown="$event.preventDefault()"
                          dusk="tallstackui_time_input"
                          class="cursor-pointer caret-transparent">
-                         <x-slot:suffix>
+                         <x-slot:suffix class="ml-1 mr-2">
                              <div class="{{ $personalize['icon.wrapper'] }}">
                                  @if (!$attributes->has('required'))
                                     <button type="button" x-on:click="clear()" x-show="model">
