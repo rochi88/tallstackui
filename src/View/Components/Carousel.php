@@ -33,7 +33,7 @@ class Carousel extends TallStackUiComponent implements Personalization
 
         $this->images = $this->images->toArray();
 
-        $this->interval = $this->interval * 1000;
+        $this->interval *= 1000;
     }
 
     public function blade(): View
