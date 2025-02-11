@@ -79,7 +79,7 @@ class SetupPrefixCommand extends Command
         if (! file_exists(base_path('.env'))) {
             $this->components->error('The .env file does not exist.');
 
-            return self::FAILURE;
+            return false;
         }
 
         try {
