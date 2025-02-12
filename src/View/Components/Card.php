@@ -21,11 +21,12 @@ class Card extends TallStackUiComponent implements Personalization
         public ?string $color = null,
         public ?bool $light = null,
         public ?bool $bordered = null,
-        public ?bool $minimize = null,
-        public ?bool $initializeMinimized = false,
+        public ?string $minimize = null,
         public ?bool $close = null,
         public ?string $image = null,
         public ?string $position = 'top',
+        #[SkipDebug]
+        public ?bool $initializeMinimized = false,
         #[SkipDebug]
         public string $style = 'solid',
         #[SkipDebug]
@@ -37,6 +38,10 @@ class Card extends TallStackUiComponent implements Personalization
     ) {
         $this->style = $this->light ? 'light' : 'solid';
         $this->variation = $this->bordered ? 'border' : 'background';
+
+        if ($this->minimize === 'mount') {
+            $this->initializeMinimized = true;
+        }
     }
 
     public function blade(): View
