@@ -101,14 +101,16 @@ body:
       placeholder: For example, 3.0.5
     validations:
       required: true
-  - type: input
+  - type: dropdown
     id: tallstackui-version
     attributes:
       label: TallStackUI Version
       description: What version of our Package are you running? Please be as specific as possible
-      placeholder: For example, 1.0.0
-    validations:
-      required: true
+      multiple: false
+      options:
+        - 2.x
+        - 1.x
+      default: 0
   - type: input
     id: php-version
     attributes:
