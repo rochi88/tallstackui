@@ -235,6 +235,19 @@ return [
 
         /*
         |----------------------------------------------------------------------
+        | Layout
+        |----------------------------------------------------------------------
+        |
+        | Controls the registration of the layout component and all its children,
+        | useful for situations where you want to ignore these components in favor
+        | of avoiding conflict with your layout component.
+        */
+        'layout' => [
+            'avoid' => env('TALLSTACKUI_AVOID_LAYOUT_REGISTRATION', false),
+        ],
+
+        /*
+        |----------------------------------------------------------------------
         | Loading
         |----------------------------------------------------------------------
         |

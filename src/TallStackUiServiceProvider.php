@@ -62,6 +62,10 @@ class TallStackUiServiceProvider extends ServiceProvider
     {
         $this->callAfterResolving(BladeCompiler::class, function (BladeCompiler $blade): void {
             foreach (config('tallstackui.components') as $name => $class) {
+                if ((bool) config('tallstackui.settings.layout.avoid') === true && str_contains($class, 'Layout')) {
+                    continue;
+                }
+
                 $blade->component($class, app(ComponentPrefix::class)->add($name));
             }
         });
