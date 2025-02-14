@@ -15,6 +15,7 @@ export default (
     value,
     limit = null,
     change = null,
+    unfiltered = false,
     lazy = 10,
 ) => ({
   show: false,
@@ -546,6 +547,6 @@ export default (
         return this.lazy ? result.slice(0, this.lazy) : result;
     }
 
-    return available.filter(filter);
+    return unfiltered ? available : available.filter(filter);
   },
 });
