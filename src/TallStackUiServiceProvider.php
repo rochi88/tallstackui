@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\View\Compilers\BladeCompiler;
 use TallStackUi\Foundation\Console\FindComponentCommand;
+use TallStackUi\Foundation\Console\IdeCommand;
 use TallStackUi\Foundation\Console\SetupColorCommand;
 use TallStackUi\Foundation\Console\SetupPrefixCommand;
 use TallStackUi\Foundation\Personalization\PersonalizationFactory;
@@ -45,6 +46,7 @@ class TallStackUiServiceProvider extends ServiceProvider
             SetupPrefixCommand::class,
             FindComponentCommand::class,
             SetupColorCommand::class,
+            IdeCommand::class,
         ]);
     }
 
