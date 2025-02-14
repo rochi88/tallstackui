@@ -18,12 +18,8 @@ class Item extends TallStackUiComponent implements Personalization
         public ?string $route = null,
         public ?string $match = null,
         public ComponentSlot|string|null $icon = null,
-        // TODO needed?
-        public ComponentSlot|string|null $collapseIcon = null,
         public ?bool $current = null,
         public ?bool $opened = null,
-        // TODO needed?
-        public ?bool $grouped = null,
     ) {
         //
     }

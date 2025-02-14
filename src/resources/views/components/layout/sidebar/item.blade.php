@@ -18,15 +18,11 @@
                                      class="{{ $personalize['group.icon.base'] }}" />
             @endif
             {{ $text }}
-            @if ($collapseIcon instanceof \Illuminate\View\ComponentSlot)
-                {{ $collapseIcon }}
-            @else
-                <x-dynamic-component :component="TallStackUi::prefix('icon')"
-                                     :icon="TallStackUi::icon('chevron-down')"
-                                     internal
-                                     class="{{ $personalize['group.icon.collapse.base'] }}"
-                                     x-bind:class="{ '{{ $personalize['group.icon.collapse.rotate'] }}': show }" />
-            @endif
+            <x-dynamic-component :component="TallStackUi::prefix('icon')"
+                                 :icon="TallStackUi::icon('chevron-down')"
+                                 internal
+                                 class="{{ $personalize['group.icon.collapse.base'] }}"
+                                 x-bind:class="{ '{{ $personalize['group.icon.collapse.rotate'] }}': show }" />
         </button>
         <ul x-show="show" class="{{ $personalize['group.group'] }}">
             {{ $slot }}
