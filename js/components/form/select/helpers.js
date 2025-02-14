@@ -25,8 +25,6 @@ export const body = (request, search, selected) => {
     init.headers['X-CSRF-TOKEN'] = token
   }
 
-  console.log(params);
-
   if (method === 'get') {
     if (search !== '') {
       params.search = search
