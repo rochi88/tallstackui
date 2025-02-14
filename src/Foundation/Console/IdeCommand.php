@@ -4,9 +4,16 @@ namespace TallStackUi\Foundation\Console;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
+use TallStackUi\View\Components;
 
 class IdeCommand extends Command
 {
+    private const IGNORES = [
+        Components\Floating::class,
+        Components\Wrapper\Input::class,
+        Components\Wrapper\Radio::class,
+    ];
+
     protected $description = 'Generate IDE configuration file for TallStackUI components.';
 
     protected $signature = 'tallstackui:ide';
@@ -31,7 +38,10 @@ class IdeCommand extends Command
 
         File::delete(base_path('ide.json'));
 
-        foreach (config('tallstackui.components') as $name => $class) {
+        foreach (
+            collect($components)
+                ->filter(fn ($class) => ! in_array($class, self::IGNORES)) as $name => $class
+        ) {
             $list[] = [
                 'name' => $name,
                 'className' => $class,
