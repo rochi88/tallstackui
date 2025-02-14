@@ -39,7 +39,8 @@
             {!! $action !!}
         @endif
         <x-dynamic-component :component="TallStackUi::prefix('floating')"
-                             :floating="$personalize['floating']"
+                             :floating="$personalize['floating.default']"
+                             :class="$personalize['floating.class']"
                              offset="5"
                              :$position
                              x-anchor="$refs.dropdown"

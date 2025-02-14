@@ -44,7 +44,10 @@ class Dropdown extends TallStackUiComponent implements Personalization
             ],
             'header.wrapper' => 'm-2',
             'slot.wrapper' => 'overflow-hidden rounded-md',
-            'floating' => collect(app(Floating::class)->personalization())->get('wrapper'),
+            'floating' => [
+                'default' => collect(app(Floating::class)->personalization())->get('wrapper'),
+                'class' => 'w-56',
+            ],
             'action' => [
                 'wrapper' => 'inline-flex w-full gap-x-1.5',
                 'text' => 'text-sm text-gray-700 font-medium dark:text-dark-400',
