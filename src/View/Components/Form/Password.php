@@ -60,40 +60,41 @@ class Password extends TallStackUiComponent implements Personalization
 
     protected function setup(): void
     {
-        if (blank($this->rules)) {
+        if (blank($this->rules) && ! $this->generator) {
             return;
         }
 
         $default = config('tallstackui.settings.form.password.rules');
 
-        $this->rules = collect(is_bool($this->rules) ? $default : $this->rules)->mapWithKeys(function (string $value, ?string $key = null) use ($default): array {
-            // When $this->rules is null, we interact with default values.
-            if (is_null($this->rules)) {
-                return match ($key) {
-                    'min' => ['min' => $value],
-                    'numbers' => ['numbers' => (bool) $value],
-                    'mixed' => ['mixed' => (bool) $value],
-                    'symbols' => ['symbols' => $value],
+        $this->rules = collect(is_bool($this->rules) || is_null($this->rules) ? $default : $this->rules)
+            ->mapWithKeys(function (string $value, ?string $key = null) use ($default): array {
+                // When $this->rules is null, we interact with default values.
+                if (is_null($this->rules)) {
+                    return match ($key) {
+                        'min' => ['min' => $value],
+                        'numbers' => ['numbers' => (bool) $value],
+                        'mixed' => ['mixed' => (bool) $value],
+                        'symbols' => ['symbols' => $value],
+                        default => [],
+                    };
+                }
+
+                $rescued = rescue(fn () => explode(':', $value)[1], report: false);
+
+                return match (true) {
+                    str_contains($value, 'min') => ['min' => $rescued ?? data_get($default, 'min', 8)],
+                    str_contains($value, 'numbers') => ['numbers' => true],
+                    str_contains($value, 'symbols') => ['symbols' => $rescued ?? data_get($default, 'symbols', '!@#$%^&*()_+-=')],
+                    str_contains($value, 'mixed') => ['mixed' => true],
                     default => [],
                 };
-            }
-
-            $rescued = rescue(fn () => explode(':', $value)[1], report: false);
-
-            return match (true) {
-                str_contains($value, 'min') => ['min' => $rescued ?? data_get($default, 'min', 8)],
-                str_contains($value, 'numbers') => ['numbers' => true],
-                str_contains($value, 'symbols') => ['symbols' => $rescued ?? data_get($default, 'symbols', '!@#$%^&*()_+-=')],
-                str_contains($value, 'mixed') => ['mixed' => true],
-                default => [],
-            };
-        });
+            });
     }
 
     /** @throws Exception */
     protected function validate(): void
     {
-        if ($this->generator && $this->rules->isEmpty()) {
+        if ($this->generator && $this->rules?->isEmpty()) {
             throw new Exception('The password [generator] requires the [rules] of the password.');
         }
     }

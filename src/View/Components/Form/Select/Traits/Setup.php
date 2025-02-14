@@ -22,16 +22,21 @@ trait Setup
 
         $select = explode('|', $this->select);
 
+        // $label is actually the name of the label, and not the label itself. The same
+        // happens to the $value, is the name of the value and not the value itself.
         [$label, $value] = array_map(fn ($item) => explode(':', $item)[1], $select);
 
         $component = $this instanceof Native ? 'select.native' : 'select.styled';
 
-        $this->options = collect($this->options)->map(function (array $item) use ($label, $value, $component): array {
-            if (! isset($item[$label])) {
+        $images = array_flip(['image', 'img', 'img_src']);
+        $descriptions = array_flip(['description', 'note']);
+
+        $this->options = collect($this->options)->map(function (array $item) use ($label, $value, $component, $images, $descriptions): array {
+            if (! array_key_exists($label, $item)) {
                 throw new InvalidArgumentException("The $component key [$label] is missing in the options array.");
             }
 
-            if (! isset($item[$value])) {
+            if (! array_key_exists($value, $item)) {
                 throw new InvalidArgumentException("The $component [$value] is missing in the options array.");
             }
 
@@ -40,9 +45,9 @@ trait Setup
             return [
                 $label => $item[$label],
                 $value => $item[$value],
-                'image' => current(array_intersect_key($item, array_flip(['image', 'img', 'img_src']))) ?: null,
+                'image' => current(array_intersect_key($item, $images)) ?: null,
                 'disabled' => $item['disabled'] ?? false,
-                'description' => current(array_intersect_key($item, array_flip(['description', 'note']))) ?: null,
+                'description' => current(array_intersect_key($item, $descriptions)) ?: null,
             ];
         })->toArray();
 
