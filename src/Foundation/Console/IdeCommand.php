@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\File;
 
 class IdeCommand extends Command
 {
-    protected $description = 'Generate IDE configuration file for TallStackUI Components.';
+    protected $description = 'Generate IDE configuration file for TallStackUI components.';
 
     protected $signature = 'tallstackui:ide';
 
