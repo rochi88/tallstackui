@@ -4,6 +4,7 @@ namespace TallStackUi\Foundation\Console;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
+use TallStackUi\Facades\TallStackUi;
 use TallStackUi\View\Components;
 
 class IdeCommand extends Command
@@ -43,7 +44,7 @@ class IdeCommand extends Command
                 ->filter(fn ($class) => ! in_array($class, self::IGNORES)) as $name => $class
         ) {
             $list[] = [
-                'name' => $name,
+                'name' => TallStackUi::prefix($name),
                 'className' => $class,
             ];
         }
