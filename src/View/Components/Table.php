@@ -101,7 +101,7 @@ class Table extends TallStackUiComponent implements Personalization
     public function ids(): array
     {
         return $this->rows instanceof ArrayAccess
-            ? $this->rows->pluck($this->selectableProperty)->all() // @phpstan-ignore-line
+            ? $this->rows->pluck($this->selectableProperty)->all()
             : collect($this->rows)->pluck($this->selectableProperty)->all();
     }
 
