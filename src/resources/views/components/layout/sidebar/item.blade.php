@@ -24,12 +24,13 @@
                                  class="{{ $personalize['group.icon.collapse.base'] }}"
                                  x-bind:class="{ '{{ $personalize['group.icon.collapse.rotate'] }}': show }" />
         </button>
-        <ul x-show="show" class="{{ $personalize['group.group'] }}">
+        <ul x-show="show" class="{{ $personalize['group.group'] }}" x-data x-ref="parent">
             {{ $slot }}
         </ul>
     </li>
 @else
-    <li class="{{ $personalize['item.wrapper'] }}">
+    <li class="{{ $personalize['item.wrapper.base'] }}"
+        x-bind:class="{ '{{ $personalize['item.wrapper.border'] }}' : $refs.parent !== undefined }">
         <a @if ($route) href="{{ $route }}" @endif
             @class([
                 $personalize['item.state.base'],
