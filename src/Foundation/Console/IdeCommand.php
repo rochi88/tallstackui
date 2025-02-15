@@ -6,6 +6,7 @@ use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
 use TallStackUi\Facades\TallStackUi;
 use TallStackUi\View\Components;
+use function Laravel\Prompts\confirm;
 
 class IdeCommand extends Command
 {
@@ -21,6 +22,10 @@ class IdeCommand extends Command
 
     public function handle(): int
     {
+        if (app()->isProduction() && ! confirm('The application is in production. Do you want to continue?', default: false)) {
+            return self::FAILURE;
+        }
+
         $json = ['$schema' => 'https://laravel-ide.com/schema/laravel-ide-v2.json'];
 
         $list = [];
