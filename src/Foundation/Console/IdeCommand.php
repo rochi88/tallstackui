@@ -6,6 +6,7 @@ use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
 use TallStackUi\Facades\TallStackUi;
 use TallStackUi\View\Components;
+
 use function Laravel\Prompts\confirm;
 
 class IdeCommand extends Command
