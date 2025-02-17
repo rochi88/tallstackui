@@ -22,27 +22,42 @@ export default (model, min, max, delay, step) => ({
    * @return {void}
    */
   increment() {
-    if (this.limiters) {
-      if (this.defined && this.atPlus) {
-        this.disablePlus = true;
-        return;
-      }
+    const update = (value) => {
+      this.$refs.input.stepUp(value);
+      this.$refs.input.dispatchEvent(new Event('change'));
+      this.update();
+    };
 
-      if ((parseInt(this.model) + step) > this.max) {
-        this.model = this.max;
-        this.$refs.input.value = this.max;
-        this.disablePlus = true;
+    const current = this.model !== null ? parseInt(this.model, 10) : null;
+    const max = this.max;
 
-        return;
-      }
+    if (current !== null && max !== null && current >= max) {
+      this.disablePlus = true;
 
-      this.model ||= this.min;
-      this.$refs.input.value ||= this.min;
+      return;
     }
 
-    this.$refs.input.stepUp(step);
-    this.$refs.input.dispatchEvent(new Event('change'));
-    this.update();
+    if (max !== null) {
+      if (current !== null && current + step < max) {
+        update(step);
+
+        return;
+      }
+
+      if (max > step) {
+        update(step);
+
+        return;
+      }
+
+      if (max === 0) {
+        update(0);
+
+        return;
+      }
+    }
+
+    update(step);
   },
   /**
    * Decrement the value.
@@ -50,27 +65,37 @@ export default (model, min, max, delay, step) => ({
    * @return {void}
    */
   decrement() {
-    if (this.limiters) {
-      if (this.defined && this.atMinus) {
-        this.disableMinus = true;
-        return;
-      }
+    const update = (value) => {
+      this.$refs.input.stepDown(value);
+      this.$refs.input.dispatchEvent(new Event('change'));
+      this.update();
+    };
 
-      if ((parseInt(this.model) - step) < this.min) {
-        this.model = this.min;
-        this.$refs.input.value = this.min;
-        this.disableMinus = true;
+    const current = this.model !== null ? parseInt(this.model, 10) : null;
+    const min = this.min;
 
-        return;
-      }
-
-      this.model ||= this.min;
-      this.$refs.input.value ||= this.min;
+    if (current !== null && min !== null && current <= min) {
+      this.disableMinus = true;
+      return;
     }
 
-    this.$refs.input.stepDown(step);
-    this.$refs.input.dispatchEvent(new Event('change'));
-    this.update();
+    if (min !== null && current !== null && (current - step) > min) {
+      update(step);
+
+      return;
+    } else if (min !== null && min < step) {
+      if (current !== null) {
+        update((current - step) >= 0 ? step : 0);
+
+        return;
+      } else if (min === 0) {
+        update(0);
+
+        return;
+      }
+    }
+
+    update(step);
   },
   /**
    * Update the value of the model.
@@ -80,12 +105,13 @@ export default (model, min, max, delay, step) => ({
   update() {
     this.model = this.$refs.input.value;
 
-    if (!this.limiters) {
-      return;
+    if (this.min !== null) {
+      this.disableMinus = this.defined && this.atMinus;
     }
 
-    this.disableMinus = this.defined && this.atMinus;
-    this.disablePlus = this.defined && this.atPlus;
+    if (this.max !== null) {
+      this.disablePlus = this.defined && this.atPlus;
+    }
   },
   /**
    * Performs validations on the input value when blur effect occurs.
@@ -143,13 +169,5 @@ export default (model, min, max, delay, step) => ({
    */
   set disablePlus(disabled) {
     this.$refs.plus.disabled = disabled;
-  },
-  /**
-   * Check if the model has limiters.
-   *
-   * @return {Boolean}
-   */
-  get limiters() {
-    return this.min !== null || this.max !== null;
   },
 });

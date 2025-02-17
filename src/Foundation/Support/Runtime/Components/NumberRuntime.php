@@ -31,11 +31,7 @@ class NumberRuntime extends AbstractRuntime
             ],
         ];
 
-        $value = $this->value($property);
-
-        if (filled($value)) {
-            $this->validate($value);
-        }
+        $this->validate($this->value($property));
 
         return $data;
     }
