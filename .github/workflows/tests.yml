@@ -51,6 +51,7 @@ jobs:
         run: |
           composer require "laravel/framework:${{ matrix.laravel }}" --no-interaction --no-progress --ansi --no-update
           composer update --no-interaction --no-progress --ansi
+          composer require livewire/livewire:v3.4.9 --no-interaction --no-progress --ansi
 
       - name: Rector Cache
         uses: actions/cache@v4

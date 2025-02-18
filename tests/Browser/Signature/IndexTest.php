@@ -198,4 +198,11 @@ class IndexTest extends BrowserTestCase
         })
             ->assertSee('The signature [line] must be a number.');
     }
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->skipOnGitHubActions('This test is not compatible with GitHub Actions');
+    }
 }
