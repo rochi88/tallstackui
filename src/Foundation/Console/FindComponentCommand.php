@@ -90,7 +90,7 @@ class FindComponentCommand extends Command
                 preg_match('/^(.*?):(\d+):(.*)$/', $line, $matches);
             }
 
-            if (count($matches) < 3) {
+            if (blank($line) || count($matches) < 3) {
                 return false;
             }
 
