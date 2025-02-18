@@ -37,7 +37,7 @@ class SideBar extends TallStackUiComponent implements Personalization
                     'fourth' => 'dark:bg-dark-700 flex grow flex-col gap-y-5 overflow-y-auto bg-white px-2 pb-4',
                     'fifth' => 'mt-10 flex h-16 shrink-0 items-center',
                     'sixth' => 'flex h-16 flex-1 flex-col',
-                    'seventh' => 'flex flex-1 flex-col gap-y-1',
+                    'seventh' => 'flex flex-1 flex-col gap-y-0.5',
                 ],
                 'backdrop' => 'fixed inset-0 bg-gray-900/80 dark:bg-dark-900/50',
                 'button' => [
@@ -52,7 +52,7 @@ class SideBar extends TallStackUiComponent implements Personalization
                     'second' => 'dark:bg-dark-700 dark:border-dark-600 flex grow flex-col gap-y-5 overflow-y-auto border-r border-gray-200 bg-white px-2 pb-4',
                     'third' => 'mt-10 flex h-16 shrink-0 items-center',
                     'fourth' => 'flex h-16 flex-1 flex-col',
-                    'fifth' => 'flex flex-1 flex-col gap-y-1',
+                    'fifth' => 'flex flex-1 flex-col gap-y-0.5',
                 ],
             ],
         ]);
