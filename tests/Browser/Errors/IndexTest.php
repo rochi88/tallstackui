@@ -5,11 +5,12 @@ namespace Tests\Browser\Errors;
 use Livewire\Attributes\Rule;
 use Livewire\Component;
 use Livewire\Livewire;
+use PHPUnit\Framework\Attributes\Test;
 use Tests\Browser\BrowserTestCase;
 
 class IndexTest extends BrowserTestCase
 {
-    /** @test */
+    #[Test]
     public function can_close(): void
     {
         Livewire::visit(new class extends Component
@@ -42,7 +43,7 @@ class IndexTest extends BrowserTestCase
             ->assertDontSee('There are 1 validation errors:');
     }
 
-    /** @test */
+    #[Test]
     public function can_dispatch_event_when_set(): void
     {
         Livewire::visit(new class extends Component
@@ -82,7 +83,7 @@ class IndexTest extends BrowserTestCase
             ->assertVisible('@close');
     }
 
-    /** @test */
+    #[Test]
     public function can_render(): void
     {
         Livewire::visit(new class extends Component
@@ -112,7 +113,7 @@ class IndexTest extends BrowserTestCase
             ->waitForText('There are 1 validation errors:');
     }
 
-    /** @test */
+    #[Test]
     public function can_render_only_selecteds_fields(): void
     {
         Livewire::visit(new class extends Component

@@ -4,11 +4,12 @@ namespace Tests\Browser\Form;
 
 use Livewire\Component;
 use Livewire\Livewire;
+use PHPUnit\Framework\Attributes\Test;
 use Tests\Browser\BrowserTestCase;
 
 class DateTest extends BrowserTestCase
 {
-    /** @test */
+    #[Test]
     public function can_advance_to_next_month(): void
     {
         Livewire::visit(new class extends Component
@@ -34,7 +35,7 @@ class DateTest extends BrowserTestCase
             ->assertSee('December');
     }
 
-    /** @test */
+    #[Test]
     public function can_advance_to_next_year(): void
     {
         Livewire::visit(new class extends Component
@@ -63,7 +64,7 @@ class DateTest extends BrowserTestCase
             ->assertSee('1990');
     }
 
-    /** @test */
+    #[Test]
     public function can_boot_on_first_date(): void
     {
         Livewire::visit(new class extends Component
@@ -90,7 +91,7 @@ class DateTest extends BrowserTestCase
             ->assertSee('1999');
     }
 
-    /** @test */
+    #[Test]
     public function can_boot_on_first_date_in_multiple(): void
     {
         Livewire::visit(new class extends Component
@@ -117,7 +118,7 @@ class DateTest extends BrowserTestCase
             ->assertSee('1999');
     }
 
-    /** @test */
+    #[Test]
     public function can_boot_on_first_date_in_range(): void
     {
         Livewire::visit(new class extends Component
@@ -144,7 +145,7 @@ class DateTest extends BrowserTestCase
             ->assertSee('1999');
     }
 
-    /** @test */
+    #[Test]
     public function can_interact_with_clear_event(): void
     {
         Livewire::visit(new class extends Component
@@ -178,7 +179,7 @@ class DateTest extends BrowserTestCase
             ->assertDontSeeIn('@date', '2020-01-01');
     }
 
-    /** @test */
+    #[Test]
     public function can_interact_with_select_event(): void
     {
         Livewire::visit(new class extends Component
@@ -212,7 +213,7 @@ class DateTest extends BrowserTestCase
             ->assertSeeIn('@selected', '1');
     }
 
-    /** @test */
+    #[Test]
     public function can_navigate_to_last_year(): void
     {
         Livewire::visit(new class extends Component
@@ -241,7 +242,7 @@ class DateTest extends BrowserTestCase
             ->assertSee('2040');
     }
 
-    /** @test */
+    #[Test]
     public function can_navigate_to_previous_month(): void
     {
         Livewire::visit(new class extends Component
@@ -267,7 +268,7 @@ class DateTest extends BrowserTestCase
             ->assertSee('February');
     }
 
-    /** @test */
+    #[Test]
     public function can_open_month_selector_and_navigate(): void
     {
         Livewire::visit(new class extends Component
@@ -295,7 +296,7 @@ class DateTest extends BrowserTestCase
             ->assertSee('Dec');
     }
 
-    /** @test */
+    #[Test]
     public function can_react_to_wire_change(): void
     {
         Livewire::visit(new class extends Component
@@ -331,7 +332,7 @@ class DateTest extends BrowserTestCase
             ->waitForTextIn('@changed', 'Changed');
     }
 
-    /** @test */
+    #[Test]
     public function can_react_to_wire_change_through_helpers(): void
     {
         Livewire::visit(new class extends Component
@@ -367,7 +368,7 @@ class DateTest extends BrowserTestCase
             ->waitForTextIn('@changed', 'Changed');
     }
 
-    /** @test */
+    #[Test]
     public function can_reset_calendar_when_reopen(): void
     {
         Livewire::visit(new class extends Component
@@ -408,7 +409,7 @@ class DateTest extends BrowserTestCase
             ->assertDontSee('June');
     }
 
-    /** @test */
+    #[Test]
     public function can_select_date()
     {
         Livewire::visit(new class extends Component
@@ -435,7 +436,7 @@ class DateTest extends BrowserTestCase
             ->assertSeeIn('@date', '2020-01-02');
     }
 
-    /** @test */
+    #[Test]
     public function can_select_date_on_multiple()
     {
         Livewire::visit(new class extends Component
@@ -465,7 +466,7 @@ class DateTest extends BrowserTestCase
             ->assertSeeIn('@date', '["2020-01-03","2020-01-02","2020-01-04"]');
     }
 
-    /** @test */
+    #[Test]
     public function can_select_date_on_range()
     {
         Livewire::visit(new class extends Component
@@ -493,7 +494,7 @@ class DateTest extends BrowserTestCase
             ->assertSeeIn('@date', '["2020-01-04","2020-01-11"]');
     }
 
-    /** @test */
+    #[Test]
     public function can_select_month_year()
     {
         Livewire::visit(new class extends Component
@@ -529,7 +530,7 @@ class DateTest extends BrowserTestCase
             ->assertSeeIn('@date', '2021-02');
     }
 
-    /** @test */
+    #[Test]
     public function can_select_today(): void
     {
         Livewire::visit(new class extends Component
@@ -561,7 +562,7 @@ class DateTest extends BrowserTestCase
             ->assertDontSee('Today');
     }
 
-    /** @test */
+    #[Test]
     public function can_use_max_date(): void
     {
         Livewire::visit(new class extends Component
@@ -591,7 +592,7 @@ class DateTest extends BrowserTestCase
             ->assertSeeIn('@date', '2024-01-01');
     }
 
-    /** @test */
+    #[Test]
     public function can_use_min_date(): void
     {
         Livewire::visit(new class extends Component
@@ -623,7 +624,7 @@ class DateTest extends BrowserTestCase
             ->assertSeeIn('@date', '2024-01-04');
     }
 
-    /** @test */
+    #[Test]
     public function can_use_today_helper(): void
     {
         Livewire::visit(new class extends Component
@@ -649,7 +650,7 @@ class DateTest extends BrowserTestCase
             ->assertSeeIn('@date', $date);
     }
 
-    /** @test */
+    #[Test]
     public function can_use_tomorrow_helper(): void
     {
         Livewire::visit(new class extends Component
@@ -675,7 +676,7 @@ class DateTest extends BrowserTestCase
             ->assertSeeIn('@date', $date);
     }
 
-    /** @test */
+    #[Test]
     public function can_use_yesterday_helper(): void
     {
         Livewire::visit(new class extends Component
@@ -701,7 +702,7 @@ class DateTest extends BrowserTestCase
             ->assertSeeIn('@date', $date);
     }
 
-    /** @test */
+    #[Test]
     public function cannot_navigate_beyond_max_year(): void
     {
         Livewire::visit(new class extends Component
@@ -733,7 +734,7 @@ class DateTest extends BrowserTestCase
             ->assertDontSee('January');
     }
 
-    /** @test */
+    #[Test]
     public function cannot_navigate_beyond_min_year(): void
     {
         Livewire::visit(new class extends Component
@@ -765,7 +766,7 @@ class DateTest extends BrowserTestCase
             ->assertDontSee('December');
     }
 
-    /** @test */
+    #[Test]
     public function cannot_use_a_min_date_greater_than_max_date(): void
     {
         Livewire::visit(new class extends Component
@@ -786,7 +787,7 @@ class DateTest extends BrowserTestCase
             ->assertSee('The date [min-date] must be less than or equal to [max-date].');
     }
 
-    /** @test */
+    #[Test]
     public function cannot_use_a_min_year_greater_than_max_year(): void
     {
         Livewire::visit(new class extends Component
@@ -807,7 +808,7 @@ class DateTest extends BrowserTestCase
             ->assertSee('The year [min-year] must be less than or equal to [max-year].');
     }
 
-    /** @test */
+    #[Test]
     public function cannot_use_the_first_date_greater_than_the_second_on_range(): void
     {
         Livewire::visit(new class extends Component

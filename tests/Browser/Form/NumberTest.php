@@ -4,11 +4,12 @@ namespace Tests\Browser\Form;
 
 use Livewire\Component;
 use Livewire\Livewire;
+use PHPUnit\Framework\Attributes\Test;
 use Tests\Browser\BrowserTestCase;
 
 class NumberTest extends BrowserTestCase
 {
-    /** @test */
+    #[Test]
     public function can_decrease(): void
     {
         Livewire::visit(new class extends Component
@@ -40,7 +41,7 @@ class NumberTest extends BrowserTestCase
             ->waitForTextIn('@decreased', '0');
     }
 
-    /** @test */
+    #[Test]
     public function can_decrease_by_step(): void
     {
         Livewire::visit(new class extends Component
@@ -72,7 +73,7 @@ class NumberTest extends BrowserTestCase
             ->waitForTextIn('@decreased', '5');
     }
 
-    /** @test */
+    #[Test]
     public function can_decrease_more_than_zero()
     {
         Livewire::visit(new class extends Component
@@ -108,7 +109,7 @@ class NumberTest extends BrowserTestCase
             ->assertSeeIn('@quantity', '-3');
     }
 
-    /** @test */
+    #[Test]
     public function can_decrease_pressing(): void
     {
         Livewire::visit(new class extends Component
@@ -131,7 +132,7 @@ class NumberTest extends BrowserTestCase
             ->waitForTextIn('@decreased', '5');
     }
 
-    /** @test */
+    #[Test]
     public function can_decrease_with_live_entangle(): void
     {
         Livewire::visit(new class extends Component
@@ -165,7 +166,7 @@ class NumberTest extends BrowserTestCase
             ->assertSeeIn('@decreased', '0');
     }
 
-    /** @test */
+    #[Test]
     public function can_increase(): void
     {
         Livewire::visit(new class extends Component
@@ -197,7 +198,7 @@ class NumberTest extends BrowserTestCase
             ->waitForTextIn('@increased', '3');
     }
 
-    /** @test */
+    #[Test]
     public function can_increase_and_dispatch_change_event(): void
     {
         Livewire::visit(new class extends Component
@@ -227,7 +228,7 @@ class NumberTest extends BrowserTestCase
             ->waitForTextIn('@increased', '3');
     }
 
-    /** @test */
+    #[Test]
     public function can_increase_by_step(): void
     {
         Livewire::visit(new class extends Component
@@ -259,7 +260,7 @@ class NumberTest extends BrowserTestCase
             ->waitForTextIn('@increased', '15');
     }
 
-    /** @test */
+    #[Test]
     public function can_increase_pressing(): void
     {
         Livewire::visit(new class extends Component
@@ -282,7 +283,7 @@ class NumberTest extends BrowserTestCase
             ->waitForTextIn('@increased', '10');
     }
 
-    /** @test */
+    #[Test]
     public function can_increase_with_live_entangle(): void
     {
         Livewire::visit(new class extends Component
@@ -316,7 +317,7 @@ class NumberTest extends BrowserTestCase
             ->assertSeeIn('@increased', '3');
     }
 
-    /** @test */
+    #[Test]
     public function cannot_decrease_beyond_min(): void
     {
         Livewire::visit(new class extends Component
@@ -348,7 +349,7 @@ class NumberTest extends BrowserTestCase
             ->waitForTextIn('@decreased', '2');
     }
 
-    /** @test */
+    #[Test]
     public function cannot_decrease_beyond_zero()
     {
         Livewire::visit(new class extends Component
@@ -381,7 +382,7 @@ class NumberTest extends BrowserTestCase
             ->waitForTextIn('@quantity', '0');
     }
 
-    /** @test */
+    #[Test]
     public function cannot_increase_beyond_max(): void
     {
         Livewire::visit(new class extends Component
@@ -413,7 +414,7 @@ class NumberTest extends BrowserTestCase
             ->waitForTextIn('@increased', '10');
     }
 
-    /** @test */
+    #[Test]
     public function cannot_increase_or_decrease_beyond_values(): void
     {
         Livewire::visit(new class extends Component

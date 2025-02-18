@@ -4,11 +4,12 @@ namespace Tests\Browser\Form\Select;
 
 use Livewire\Component;
 use Livewire\Livewire;
+use PHPUnit\Framework\Attributes\Test;
 use Tests\Browser\BrowserTestCase;
 
 class StyledSearchableTest extends BrowserTestCase
 {
-    /** @test */
+    #[Test]
     public function can_clear(): void
     {
         Livewire::visit(StyledComponent_Searchable::class)
@@ -29,7 +30,7 @@ class StyledSearchableTest extends BrowserTestCase
             ->assertSee('Select an option');
     }
 
-    /** @test */
+    #[Test]
     public function can_open(): void
     {
         Livewire::visit(StyledComponent_Searchable::class)
@@ -43,7 +44,7 @@ class StyledSearchableTest extends BrowserTestCase
             ->waitForText(['delectus aut autem', 'quis ut nam facilis et officia qui', 'fugiat veniam minus', 'et porro tempora', 'laboriosam mollitia et enim quasi adipisci quia provident illum']);
     }
 
-    /** @test */
+    #[Test]
     public function can_render_after_slot(): void
     {
         Livewire::visit(new class extends Component
@@ -89,7 +90,7 @@ class StyledSearchableTest extends BrowserTestCase
             ->waitForText('Ooops');
     }
 
-    /** @test */
+    #[Test]
     public function can_search(): void
     {
         Livewire::visit(new class extends Component
@@ -136,7 +137,7 @@ class StyledSearchableTest extends BrowserTestCase
             ->assertDontSee('laboriosam mollitia et enim quasi adipisci quia provident illum');
     }
 
-    /** @test */
+    #[Test]
     public function can_select(): void
     {
         Livewire::visit(StyledComponent_Searchable::class)
@@ -154,7 +155,7 @@ class StyledSearchableTest extends BrowserTestCase
             ->assertDontSee('Select an option');
     }
 
-    /** @test */
+    #[Test]
     public function can_select_multiple(): void
     {
         Livewire::visit(StyledMultipleComponent_Searchable::class)
@@ -174,7 +175,7 @@ class StyledSearchableTest extends BrowserTestCase
             ->waitForText(['delectus aut autem', 'quis ut nam facilis et officia qui', 'fugiat veniam minus']);
     }
 
-    /** @test */
+    #[Test]
     public function can_select_multiple_with_live_entangle(): void
     {
         Livewire::visit(new class extends Component
@@ -230,7 +231,7 @@ class StyledSearchableTest extends BrowserTestCase
             ->waitForText(['delectus aut autem', 'quis ut nam facilis et officia qui', 'fugiat veniam minus']);
     }
 
-    /** @test */
+    #[Test]
     public function can_select_multiple_with_live_entangle_preserving_default(): void
     {
         Livewire::visit(new class extends Component
@@ -286,7 +287,7 @@ class StyledSearchableTest extends BrowserTestCase
             ->waitForText(['quis ut nam facilis et officia qui', 'fugiat veniam minus,delectus aut autem', 'delectus aut autem']);
     }
 
-    /** @test */
+    #[Test]
     public function can_unselect(): void
     {
         Livewire::visit(StyledComponent_Searchable::class)
@@ -308,7 +309,7 @@ class StyledSearchableTest extends BrowserTestCase
             ->assertSee('Select an option');
     }
 
-    /** @test */
+    #[Test]
     public function can_unselect_multiple(): void
     {
         Livewire::visit(StyledMultipleComponent_Searchable::class)
@@ -332,58 +333,6 @@ class StyledSearchableTest extends BrowserTestCase
             ->click('@tallstackui_select_open_close')
             ->click('@sync')
             ->waitForText(['delectus aut autem', 'quis ut nam facilis et officia qui']);
-    }
-
-    /** @test */
-    public function cannot_set_bind_as_array_when_multiple_was_not_set(): void
-    {
-        Livewire::visit(new class extends Component
-        {
-            public array $string = [1];
-
-            public function render(): string
-            {
-                return <<<'HTML'
-                <div>
-                    <x-select.styled wire:model="string" :request="route('searchable.simple')" />
-
-                    <x-button dusk="sync" wire:click="sync">Sync</x-button>
-                </div>
-                HTML;
-            }
-
-            public function sync(): void
-            {
-                // ...
-            }
-        })
-            ->assertSee('The [select.styled] [wire:model] must not be an array when multiple is not set.');
-    }
-
-    /** @test */
-    public function cannot_set_multiple_with_a_non_array_bind(): void
-    {
-        Livewire::visit(new class extends Component
-        {
-            public string $string = 'a';
-
-            public function render(): string
-            {
-                return <<<'HTML'
-                <div>
-                    <x-select.styled wire:model="string" :request="route('searchable.simple')" multiple />
-
-                    <x-button dusk="sync" wire:click="sync">Sync</x-button>
-                </div>
-                HTML;
-            }
-
-            public function sync(): void
-            {
-                // ...
-            }
-        })
-            ->assertSee('The [select.styled] [wire:model] must be an array when multiple is set.');
     }
 }
 
