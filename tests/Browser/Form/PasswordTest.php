@@ -4,11 +4,12 @@ namespace Tests\Browser\Form;
 
 use Livewire\Component;
 use Livewire\Livewire;
+use PHPUnit\Framework\Attributes\Test;
 use Tests\Browser\BrowserTestCase;
 
 class PasswordTest extends BrowserTestCase
 {
-    /** @test */
+    #[Test]
     public function can_dispatch_event_when_generate(): void
     {
         Livewire::visit(new class extends Component
@@ -44,7 +45,7 @@ class PasswordTest extends BrowserTestCase
             ->assertVisible('@generate');
     }
 
-    /** @test */
+    #[Test]
     public function can_dispatch_event_when_reveal(): void
     {
         Livewire::visit(new class extends Component
@@ -79,7 +80,7 @@ class PasswordTest extends BrowserTestCase
             ->assertSeeIn('@reveal', '123');
     }
 
-    /** @test */
+    #[Test]
     public function can_generate_with_default_rules(): void
     {
         Livewire::visit(new class extends Component
@@ -110,7 +111,7 @@ class PasswordTest extends BrowserTestCase
             ->assertPresent('@reveal');
     }
 
-    /** @test */
+    #[Test]
     public function can_use_a_custom_generator_rule(): void
     {
         Livewire::visit(new class extends Component

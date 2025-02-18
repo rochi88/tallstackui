@@ -5,11 +5,12 @@ namespace Tests\Browser\Form\Select;
 use Illuminate\Support\Collection;
 use Livewire\Component;
 use Livewire\Livewire;
+use PHPUnit\Framework\Attributes\Test;
 use Tests\Browser\BrowserTestCase;
 
 class StyledCommonTest extends BrowserTestCase
 {
-    /** @test */
+    #[Test]
     public function can_clear(): void
     {
         Livewire::visit(StyledComponent_Common::class)
@@ -27,7 +28,7 @@ class StyledCommonTest extends BrowserTestCase
             ->assertSee('Select an option');
     }
 
-    /** @test */
+    #[Test]
     public function can_dispatch_events(): void
     {
         Livewire::visit(new class extends Component
@@ -94,7 +95,7 @@ class StyledCommonTest extends BrowserTestCase
             ->assertVisible('@remove');
     }
 
-    /** @test */
+    #[Test]
     public function can_interact_with_multiples_selects(): void
     {
         $this->skipOnGitHubActions();
@@ -240,7 +241,7 @@ class StyledCommonTest extends BrowserTestCase
             ->assertDontSee('FFF');
     }
 
-    /** @test */
+    #[Test]
     public function can_open(): void
     {
         Livewire::visit(StyledComponent_Common::class)
@@ -251,7 +252,7 @@ class StyledCommonTest extends BrowserTestCase
             ->waitForText(['foo', 'bar']);
     }
 
-    /** @test */
+    #[Test]
     public function can_render_after_slot(): void
     {
         Livewire::visit(StyledSearchableComponent_Common::class)
@@ -266,7 +267,7 @@ class StyledCommonTest extends BrowserTestCase
             ->waitForText('Ooops');
     }
 
-    /** @test */
+    #[Test]
     public function can_search(): void
     {
         Livewire::visit(StyledSearchableComponent_Common::class)
@@ -282,7 +283,7 @@ class StyledCommonTest extends BrowserTestCase
             ->assertDontSee('foo');
     }
 
-    /** @test */
+    #[Test]
     public function can_search_using_description(): void
     {
         Livewire::visit(new class extends Component
@@ -333,7 +334,7 @@ class StyledCommonTest extends BrowserTestCase
             ->assertDontSee('JS');
     }
 
-    /** @test */
+    #[Test]
     public function can_select(): void
     {
         Livewire::visit(StyledComponent_Common::class)
@@ -350,7 +351,7 @@ class StyledCommonTest extends BrowserTestCase
             ->assertDontSee('Select an option');
     }
 
-    /** @test */
+    #[Test]
     public function can_select_and_dispatch_change_event(): void
     {
         Livewire::visit(new class extends Component
@@ -394,7 +395,7 @@ class StyledCommonTest extends BrowserTestCase
             ->assertDontSee('Select an option');
     }
 
-    /** @test */
+    #[Test]
     public function can_select_multiple(): void
     {
         Livewire::visit(StyledMultipleComponent_Common::class)
@@ -412,7 +413,7 @@ class StyledCommonTest extends BrowserTestCase
             ->assertDontSee('Select an option');
     }
 
-    /** @test */
+    #[Test]
     public function can_select_multiple_with_live_entangle(): void
     {
         Livewire::visit(new class extends Component
@@ -471,7 +472,7 @@ class StyledCommonTest extends BrowserTestCase
             ->assertDontSee('Select an option');
     }
 
-    /** @test */
+    #[Test]
     public function can_select_multiple_with_live_entangle_preserving_default(): void
     {
         Livewire::visit(new class extends Component
@@ -529,7 +530,7 @@ class StyledCommonTest extends BrowserTestCase
             ->assertDontSee('Select an option');
     }
 
-    /** @test */
+    #[Test]
     public function can_select_multiple_with_same_label(): void
     {
         Livewire::visit(new class extends Component
@@ -577,7 +578,7 @@ class StyledCommonTest extends BrowserTestCase
             ->waitForText('baz');
     }
 
-    /** @test */
+    #[Test]
     public function can_select_with_limit_option(): void
     {
         Livewire::visit(new class extends Component
@@ -629,7 +630,7 @@ class StyledCommonTest extends BrowserTestCase
             ->assertDontSee('bah');
     }
 
-    /** @test */
+    #[Test]
     public function can_unselect(): void
     {
         Livewire::visit(StyledComponent_Common::class)
@@ -651,7 +652,7 @@ class StyledCommonTest extends BrowserTestCase
             ->assertDontSee('foo');
     }
 
-    /** @test */
+    #[Test]
     public function can_unselect_multiple(): void
     {
         Livewire::visit(StyledMultipleComponent_Common::class)
@@ -674,7 +675,7 @@ class StyledCommonTest extends BrowserTestCase
             ->waitForText(['foo', 'bar']);
     }
 
-    /** @test */
+    #[Test]
     public function cannot_unselect_when_selection_is_required(): void
     {
         Livewire::visit(new class extends Component

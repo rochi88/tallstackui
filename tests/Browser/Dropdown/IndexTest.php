@@ -4,11 +4,12 @@ namespace Tests\Browser\Dropdown;
 
 use Livewire\Component;
 use Livewire\Livewire;
+use PHPUnit\Framework\Attributes\Test;
 use Tests\Browser\BrowserTestCase;
 
 class IndexTest extends BrowserTestCase
 {
-    /** @test */
+    #[Test]
     public function can_render_with_action(): void
     {
         Livewire::visit(new class extends Component
@@ -41,7 +42,7 @@ class IndexTest extends BrowserTestCase
             ->waitUntilMissingText('Ipsum');
     }
 
-    /** @test */
+    #[Test]
     public function can_render_with_icon(): void
     {
         Livewire::visit(new class extends Component
@@ -70,7 +71,7 @@ class IndexTest extends BrowserTestCase
             ->waitUntilMissingText('Ipsum');
     }
 
-    /** @test */
+    #[Test]
     public function can_render_with_submenu(): void
     {
         Livewire::visit(new class extends Component
@@ -106,7 +107,7 @@ class IndexTest extends BrowserTestCase
             ->waitUntilMissingText('Ipsum');
     }
 
-    /** @test */
+    #[Test]
     public function can_render_with_title(): void
     {
         Livewire::visit(new class extends Component

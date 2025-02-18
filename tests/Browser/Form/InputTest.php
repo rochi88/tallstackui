@@ -5,11 +5,12 @@ namespace Tests\Browser\Form;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 use Livewire\Livewire;
+use PHPUnit\Framework\Attributes\Test;
 use Tests\Browser\BrowserTestCase;
 
 class InputTest extends BrowserTestCase
 {
-    /** @test */
+    #[Test]
     public function can_clear_input_using_clearable(): void
     {
         Livewire::visit(new class extends Component
@@ -34,7 +35,7 @@ class InputTest extends BrowserTestCase
             ->assertDontSeeIn('@name', 'Jhon Doe');
     }
 
-    /** @test */
+    #[Test]
     public function can_see_clearable(): void
     {
         Livewire::visit(new class extends Component
@@ -54,7 +55,7 @@ class InputTest extends BrowserTestCase
             ->assertPresent('@tallstackui_form_input_clearable');
     }
 
-    /** @test */
+    #[Test]
     public function cannot_see_validation_error(): void
     {
         Livewire::visit(new class extends Component
@@ -84,7 +85,7 @@ class InputTest extends BrowserTestCase
             ->assertSee('The name field is required.');
     }
 
-    /** @test */
+    #[Test]
     public function cannot_see_validation_error_when_invalidate(): void
     {
         Livewire::visit(new class extends Component

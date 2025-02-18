@@ -4,11 +4,12 @@ namespace Tests\Browser\Carousel;
 
 use Livewire\Component;
 use Livewire\Livewire;
+use PHPUnit\Framework\Attributes\Test;
 use Tests\Browser\BrowserTestCase;
 
 class IndexTest extends BrowserTestCase
 {
-    /** @test */
+    #[Test]
     public function can_dispatch_events(): void
     {
         Livewire::visit(new class extends Component
@@ -58,7 +59,7 @@ class IndexTest extends BrowserTestCase
             ->assertPresent('@previous');
     }
 
-    /** @test */
+    #[Test]
     public function can_navigate_automatically(): void
     {
         Livewire::visit(new class extends Component
@@ -100,7 +101,7 @@ class IndexTest extends BrowserTestCase
             ->assertPresent('@next');
     }
 
-    /** @test */
+    #[Test]
     public function can_navigate_next(): void
     {
         Livewire::visit(new class extends Component
@@ -141,7 +142,7 @@ class IndexTest extends BrowserTestCase
             ->waitUntilMissingText('3-bar');
     }
 
-    /** @test */
+    #[Test]
     public function can_navigate_previous(): void
     {
         Livewire::visit(new class extends Component
@@ -182,7 +183,7 @@ class IndexTest extends BrowserTestCase
             ->waitUntilMissingText('2-bar');
     }
 
-    /** @test */
+    #[Test]
     public function can_render(): void
     {
         Livewire::visit(new class extends Component
@@ -220,7 +221,7 @@ class IndexTest extends BrowserTestCase
             ->assertDontSee('3-bar');
     }
 
-    /** @test */
+    #[Test]
     public function cannot_navigate_next_without_loop(): void
     {
         Livewire::visit(new class extends Component
@@ -265,7 +266,7 @@ class IndexTest extends BrowserTestCase
             ->waitUntilMissingText('1-bar');
     }
 
-    /** @test */
+    #[Test]
     public function cannot_navigate_previous_without_loop(): void
     {
         Livewire::visit(new class extends Component
@@ -306,7 +307,7 @@ class IndexTest extends BrowserTestCase
             ->waitUntilMissingText('3-bar');
     }
 
-    /** @test */
+    #[Test]
     public function cannot_render_with_empty_images(): void
     {
         Livewire::visit(new class extends Component

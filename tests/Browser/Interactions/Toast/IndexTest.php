@@ -4,12 +4,13 @@ namespace Tests\Browser\Interactions\Toast;
 
 use Livewire\Component;
 use Livewire\Livewire;
+use PHPUnit\Framework\Attributes\Test;
 use TallStackUi\Traits\Interactions;
 use Tests\Browser\BrowserTestCase;
 
 class IndexTest extends BrowserTestCase
 {
-    /** @test */
+    #[Test]
     public function can_dispatch_confirmation_toast_without_livewire_specifing_component_id()
     {
         Livewire::visit(new class extends Component
@@ -57,7 +58,7 @@ class IndexTest extends BrowserTestCase
             ->assertSee('Cancelled Without Livewire');
     }
 
-    /** @test */
+    #[Test]
     public function can_dispatch_confirmation_toast_without_livewire_using_first_component_in_page()
     {
         Livewire::visit(new class extends Component
@@ -95,7 +96,7 @@ class IndexTest extends BrowserTestCase
             ->assertSee('Confirmed Without Livewire');
     }
 
-    /** @test */
+    #[Test]
     public function can_dispatch_events()
     {
         Livewire::visit(new class extends Component
@@ -170,7 +171,7 @@ class IndexTest extends BrowserTestCase
             ->assertSeeIn('@target', 'Timeout');
     }
 
-    /** @test */
+    #[Test]
     public function can_dispatch_toast_without_livewire()
     {
         Livewire::visit(new class extends Component
@@ -201,7 +202,7 @@ class IndexTest extends BrowserTestCase
             ->waitForText('Warning Without Livewire');
     }
 
-    /** @test */
+    #[Test]
     public function can_expand(): void
     {
         Livewire::visit(ToastComponent::class)
@@ -213,7 +214,7 @@ class IndexTest extends BrowserTestCase
             ->assertSee('specimen');
     }
 
-    /** @test */
+    #[Test]
     public function can_expand_and_not_expand_sequentially(): void
     {
         Livewire::visit(ToastComponent::class)
@@ -228,7 +229,7 @@ class IndexTest extends BrowserTestCase
             ->assertSee('chunks');
     }
 
-    /** @test */
+    #[Test]
     public function can_send(): void
     {
         Livewire::visit(ToastComponent::class)
@@ -246,7 +247,7 @@ class IndexTest extends BrowserTestCase
             ->waitForText('Foo bar warning');
     }
 
-    /** @test */
+    #[Test]
     public function can_send_cancellation(): void
     {
         Livewire::visit(ToastComponent::class)
@@ -257,7 +258,7 @@ class IndexTest extends BrowserTestCase
             ->waitForText('Bar foo cancelled bar');
     }
 
-    /** @test */
+    #[Test]
     public function can_send_confirmation(): void
     {
         Livewire::visit(ToastComponent::class)
@@ -268,7 +269,7 @@ class IndexTest extends BrowserTestCase
             ->waitForText('Foo bar confirmed foo');
     }
 
-    /** @test */
+    #[Test]
     public function can_use_close_hook()
     {
         Livewire::visit(new class extends Component
@@ -317,7 +318,7 @@ class IndexTest extends BrowserTestCase
             ->assertSee('close');
     }
 
-    /** @test */
+    #[Test]
     public function can_use_timeout_hook()
     {
         Livewire::visit(new class extends Component
@@ -366,7 +367,7 @@ class IndexTest extends BrowserTestCase
             ->assertSee('timeout');
     }
 
-    /** @test */
+    #[Test]
     public function cannot_see_cancellation_if_it_was_not_defined(): void
     {
         Livewire::visit(new class extends Component
