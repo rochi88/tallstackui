@@ -63,7 +63,18 @@ export default (flash, texts, overflowing) => ({
     }
 
     setTimeout(() => {
-      component.call(dialog.options.confirm.method, dialog.options.confirm.params);
+      // This piece of code was made to allow dialog/toast to be used inside Livewire custom
+      // directives in order to pass Livewire's action() as the method to be executed, allowing
+      // the fluent execution of the action associated with the directive.
+      const method = dialog.options.confirm.method;
+
+      if (typeof method === 'function') {
+        method();
+
+        return;
+      }
+
+      component.call(method, dialog.options.confirm.params);
 
       // This is a little trick to prevent the element from being
       // focused if there is another dialog displayed sequentially.
@@ -93,7 +104,18 @@ export default (flash, texts, overflowing) => ({
     }
 
     setTimeout(() => {
-      component.call(dialog.options.cancel.method, dialog.options.cancel.params);
+      // This piece of code was made to allow dialog/toast to be used inside Livewire custom
+      // directives in order to pass Livewire's action() as the method to be executed, allowing
+      // the fluent execution of the action associated with the directive.
+      const method = dialog.options.cancel.method;
+
+      if (typeof method === 'function') {
+        method();
+
+        return;
+      }
+
+      component.call(method, dialog.options.cancel.params);
 
       // This is a little trick to prevent the element from being
       // focused if there is another dialog displayed sequentially.
