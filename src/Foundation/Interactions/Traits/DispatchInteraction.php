@@ -4,6 +4,7 @@ namespace TallStackUi\Foundation\Interactions\Traits;
 
 use Closure;
 use Exception;
+use Illuminate\Support\Str;
 use InvalidArgumentException;
 use TallStackUi\Foundation\Interactions\Dialog;
 use TallStackUi\Foundation\Interactions\Toast;
@@ -80,6 +81,7 @@ trait DispatchInteraction
 
         if ($this->component) {
             $data['component'] = $this->component->getId();
+            $data['id'] ??= Str::uuid()->toString();
 
             $this->dispatch && $this->component->dispatch($event, ...$data);
         } else {

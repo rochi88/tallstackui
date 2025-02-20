@@ -24,7 +24,7 @@ export default (flash) => ({
     }
 
     if (event.detail) {
-      event.detail.id = event.timeStamp;
+      event.detail.id ??= `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
 
       this.toasts.push(event.detail);
     }
