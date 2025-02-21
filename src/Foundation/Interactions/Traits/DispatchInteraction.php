@@ -79,9 +79,10 @@ trait DispatchInteraction
 
         $event = sprintf('tallstackui:%s', $this->event());
 
+        $data['id'] ??= (string) Str::uuid();
+
         if ($this->component) {
             $data['component'] = $this->component->getId();
-            $data['id'] ??= Str::uuid()->toString();
 
             $this->dispatch && $this->component->dispatch($event, ...$data);
         } else {
