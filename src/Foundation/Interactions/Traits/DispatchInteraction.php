@@ -4,6 +4,7 @@ namespace TallStackUi\Foundation\Interactions\Traits;
 
 use Closure;
 use Exception;
+use Illuminate\Support\Str;
 use InvalidArgumentException;
 use TallStackUi\Foundation\Interactions\Dialog;
 use TallStackUi\Foundation\Interactions\Toast;
@@ -77,6 +78,8 @@ trait DispatchInteraction
         }
 
         $event = sprintf('tallstackui:%s', $this->event());
+
+        $data['id'] ??= (string) Str::uuid();
 
         if ($this->component) {
             $data['component'] = $this->component->getId();

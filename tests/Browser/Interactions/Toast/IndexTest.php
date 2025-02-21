@@ -22,7 +22,7 @@ class IndexTest extends BrowserTestCase
                 return <<<'HTML'
                 <div>
                     <x-button dusk="confirm" onclick="confirm()">Confirm</x-button>
-                    
+
                     <script>
                         confirm = () => $interaction('toast').question('Confirm?')
                             .wireable(Livewire.first().id)
@@ -70,7 +70,7 @@ class IndexTest extends BrowserTestCase
                 return <<<'HTML'
                 <div>
                     <x-button dusk="confirm" onclick="confirm()">Confirm</x-button>
-                    
+
                     <script>
                         confirm = () => $interaction('toast').question('Confirm?')
                             .wireable()
@@ -137,11 +137,11 @@ class IndexTest extends BrowserTestCase
             public function render(): string
             {
                 return <<<'HTML'
-                <div x-on:toast:accepted.window="$wire.set('target', 'Accepted')" 
+                <div x-on:toast:accepted.window="$wire.set('target', 'Accepted')"
                      x-on:toast:rejected.window="$wire.set('target', 'Rejected')"
                      x-on:toast:timeout.window="$wire.set('target', 'Timeout')">
                     <p dusk="target">{{ $target }}</p>
-                
+
                     <x-button dusk="confirm" wire:click="confirm">Confirm</x-button>
                     <x-button dusk="timeout" wire:click="timeout">Timeout</x-button>
                 </div>
@@ -270,6 +270,20 @@ class IndexTest extends BrowserTestCase
     }
 
     #[Test]
+    public function can_send_multiple(): void
+    {
+        $browser = Livewire::visit(ToastComponent::class);
+
+        $browser->script('window.performance.now = () => 1234567890;');
+
+        $browser->assertDontSee('Foo bar 1')
+            ->assertDontSee('Foo bar 2')
+            ->click('#multiple')
+            ->waitForText('Foo bar 1')
+            ->waitForText('Foo bar 2');
+    }
+
+    #[Test]
     public function can_use_close_hook()
     {
         Livewire::visit(new class extends Component
@@ -301,7 +315,7 @@ class IndexTest extends BrowserTestCase
                 return <<<'HTML'
                 <div>
                     <p dusk="close">{{ $close }}</p>
-                
+
                     <x-button dusk="success" wire:click="success">Success</x-button>
                 </div>
                 HTML;
@@ -351,7 +365,7 @@ class IndexTest extends BrowserTestCase
                 return <<<'HTML'
                 <div>
                     <p dusk="timeout">{{ $timeout }}</p>
-                
+
                     <x-button dusk="success" wire:click="success">Success</x-button>
                 </div>
                 HTML;
@@ -450,6 +464,12 @@ class ToastComponent extends Component
         $this->toast()->info('Foo bar info')->send();
     }
 
+    public function multiple(): void
+    {
+        $this->toast()->info('Foo bar 1')->send();
+        $this->toast()->info('Foo bar 2')->send();
+    }
+
     public function notExpandable(): void
     {
         $this->toast()
@@ -469,6 +489,7 @@ class ToastComponent extends Component
             <x-button id="confirm" wire:click="confirm">Confirm</x-button>
             <x-button id="expand" wire:click="expand">Expand</x-button>
             <x-button id="expandConfirmation" wire:click="expandConfirmation">Expand Confirmation</x-button>
+            <x-button id="multiple" wire:click="multiple">Multiple</x-button>
         </div>
         HTML;
     }
