@@ -444,7 +444,7 @@ class UploadTest extends BrowserTestCase
                     @endif
                     
                     <x-upload label="Document" wire:model.live="photo" />
-                    <x-button dusk="save" wire:click="save">Save</x-button>
+                    <button dusk="save" wire:click="save">Save</button>
                 </div>
                 HTML;
             }
@@ -467,6 +467,7 @@ class UploadTest extends BrowserTestCase
             ->waitForText('Click here to upload')
             ->attach('@tallstackui_file_select', __DIR__.'/../../Fixtures/test.jpeg')
             ->click('@tallstackui_upload_input')
+            ->pause(100)
             ->click('@save')
             ->waitForText('There was some validation error.');
     }
