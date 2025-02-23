@@ -210,6 +210,18 @@ return [
                     'symbols' => '!@#$%^&*()_+-=',
                 ],
             ],
+
+            /*
+            |----------------------------------------------------------------------
+            | Select Styled
+            |----------------------------------------------------------------------
+            | unfiltered: allow all select API styled components to be unfiltered by default.
+            */
+            'select' => [
+                'styled' => [
+                    'unfiltered' => false,
+                ],
+            ],
         ],
 
         /*
