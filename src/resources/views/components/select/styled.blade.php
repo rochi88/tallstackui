@@ -20,7 +20,7 @@
         @js($value),
         @js($limit),
         @js($change),
-        @js($unfiltered),
+        @js($configurations['unfiltered']),
         @js($lazy))"
         x-cloak
         x-on:keydown="navigate($event)"

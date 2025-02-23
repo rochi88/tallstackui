@@ -4,6 +4,7 @@ namespace TallStackUi\Foundation\Support\Configurations;
 
 use Exception;
 use TallStackUi\View\Components\Form\Color;
+use TallStackUi\View\Components\Form\Select\Styled;
 use TallStackUi\View\Components\Interaction\Dialog;
 use TallStackUi\View\Components\Interaction\Toast;
 use TallStackUi\View\Components\Loading;
@@ -26,6 +27,7 @@ class CompileConfigurations
             $component instanceof Dialog => fn () => 'dialog',
             $component instanceof Loading => fn () => $class->loading($component),
             $component instanceof Modal => fn () => $class->modal($component),
+            $component instanceof Styled => fn () => $class->select($component),
             $component instanceof Slide => fn () => $class->slide($component),
             $component instanceof Toast => fn () => 'toast',
             default => fn () => null,
@@ -107,6 +109,17 @@ class CompileConfigurations
 
         return collect($component)
             ->only(['zIndex', 'overflow', 'size', 'blur', 'persistent', 'center'])
+            ->toArray();
+    }
+
+    private function select(Styled $component): array
+    {
+        $configuration = collect(config('tallstackui.settings.form.select.styled'));
+
+        $component->unfiltered ??= $configuration->get('unfiltered', false);
+
+        return collect($component)
+            ->only('unfiltered')
             ->toArray();
     }
 
