@@ -427,6 +427,51 @@ class UploadTest extends BrowserTestCase
     }
 
     #[Test]
+    public function can_show_validation_error(): void
+    {
+        Livewire::visit(new class extends Component
+        {
+            use WithFileUploads;
+
+            public $photo;
+
+            public function render(): string
+            {
+                return <<<'HTML'
+                <div>
+                    @if ($photo)
+                        <p dusk="uploaded">{{ $photo->getClientOriginalName() }}</p>
+                    @endif
+                    
+                    <x-upload label="Document" wire:model.live="photo" />
+                    <x-button dusk="save" wire:click="save">Save</x-button>
+                </div>
+                HTML;
+            }
+
+            public function rules(): array
+            {
+                return [
+                    'photo' => ['required', 'mimes:pdf'],
+                ];
+            }
+
+            public function save(): void
+            {
+                $this->validate();
+            }
+        })
+            ->assertSee('Document')
+            ->assertMissing('@uploaded')
+            ->click('@tallstackui_upload_input')
+            ->waitForText('Click here to upload')
+            ->attach('@tallstackui_file_select', __DIR__.'/../../Fixtures/test.jpeg')
+            ->click('@tallstackui_upload_input')
+            ->click('@save')
+            ->waitForText('There was some validation error.');
+    }
+
+    #[Test]
     public function can_thrown_exception_if_property_bind_was_not_defined()
     {
         Livewire::visit(new class extends Component
