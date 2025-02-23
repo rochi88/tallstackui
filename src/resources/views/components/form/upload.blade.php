@@ -40,6 +40,11 @@
                                 </button>
                              </x-slot:suffix>
         </x-dynamic-component>
+         @if ($invalid['status'])
+            <span class="{{ $personalize['invalid'] }}">
+                {{ trans_choice('tallstack-ui::messages.upload.invalid', $invalid['quantity'], ['count' => $invalid['quantity']]) }}
+            </span>
+         @endif
     @if ($preview)
         <template x-teleport="body">
             <div x-show="preview"

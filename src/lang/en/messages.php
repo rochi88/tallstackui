@@ -72,6 +72,7 @@ return [
                 'description' => 'You don\'t have any image yet.',
             ],
         ],
+        'invalid' => '{1} There was one validation error.|[2,*] There were :count validation errors.',
     ],
 
     'date' => [

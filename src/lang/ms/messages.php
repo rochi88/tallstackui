@@ -72,6 +72,7 @@ return [
                 'description' => 'Anda tidak mempunyai gambar.',
             ],
         ],
+        'invalid' => '{1} Terdapat satu ralat pengesahan.|[2,*] Terdapat :count ralat pengesahan.',
     ],
 
     'date' => [

@@ -17,6 +17,10 @@ class UploadRuntime extends AbstractRuntime
             // We can get this directly - without need to check if we're in Livewire
             // context because this component is only used in Livewire context.
             'value' => data_get($this->livewire, $property),
+            'invalid' => [
+                'status' => $this->errors->has($property.'.*'),
+                'quantity' => count($this->errors->get($property.'.*')),
+            ],
         ];
 
         if (is_null($property)) {

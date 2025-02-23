@@ -72,6 +72,7 @@ return [
                 'description' => 'Henüz hiç resminiz yok.',
             ],
         ],
+        'invalid' => '{1} Bir doğrulama hatası oluştu.|[2,*] :count doğrulama hatası oluştu.',
     ],
 
     'date' => [
