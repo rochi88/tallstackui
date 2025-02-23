@@ -72,6 +72,7 @@ return [
                 'description' => 'Anda tidak mempunyai gambar.',
             ],
         ],
+        'invalid' => 'Terdapat ralat pengesahan.',
     ],
 
     'date' => [

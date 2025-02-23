@@ -72,6 +72,7 @@ return [
                 'description' => 'Henüz hiç resminiz yok.',
             ],
         ],
+        'invalid' => 'Bir doğrulama hatası oluştu.',
     ],
 
     'date' => [

@@ -107,6 +107,7 @@ class Upload extends TallStackUiComponent implements Personalization
                     'description' => 'dark:text-dark-400 mt-1 text-sm text-gray-700',
                 ],
             ],
+            'invalid' => 'mt-1 block text-sm font-medium text-red-500',
         ]);
     }
 }

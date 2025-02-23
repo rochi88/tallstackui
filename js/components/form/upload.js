@@ -26,6 +26,8 @@ export default (
   image: null,
   init() {
     this.component = Livewire.find(id).__instance;
+
+    this.component.$wire.watch(this.property, () => this.text());
     this.$watch('uploading', () => this.text());
     this.$watch('preview', (value) => overflow(value, 'upload', overflowing));
   },

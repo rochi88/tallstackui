@@ -67,6 +67,7 @@ return [
                 'description' => 'Nie posiadasz jeszcze żadnego obrazka.',
             ],
         ],
+        'invalid' => 'Wystąpił błąd walidacji.',
     ],
 
     'date' => [

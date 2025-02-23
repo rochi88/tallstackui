@@ -72,6 +72,7 @@ return [
                 'description' => 'Non hai ancora nessuna immagine.',
             ],
         ],
+        'invalid' => 'Si è verificato un errore di convalida.',
     ],
 
     'date' => [

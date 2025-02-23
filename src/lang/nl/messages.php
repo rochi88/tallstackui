@@ -72,6 +72,7 @@ return [
                 'description' => 'Je hebt nog geen enkel beeld.',
             ],
         ],
+        'invalid' => 'Er trad een validatiefout op.',
     ],
 
     'date' => [

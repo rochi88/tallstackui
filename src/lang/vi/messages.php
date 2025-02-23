@@ -72,6 +72,7 @@ return [
                 'description' => 'Bạn chưa có bất kỳ hình ảnh nào.',
             ],
         ],
+        'invalid' => 'Đã xảy ra lỗi xác thực.',
     ],
 
     'date' => [

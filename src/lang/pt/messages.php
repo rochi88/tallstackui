@@ -72,6 +72,7 @@ return [
                 'description' => 'Ainda não possui nenhuma imagem.',
             ],
         ],
+        'invalid' => 'Houve algum erro de validação.',
     ],
 
     'date' => [
