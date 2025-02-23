@@ -72,7 +72,7 @@ return [
                 'description' => 'Je hebt nog geen enkel beeld.',
             ],
         ],
-        'invalid' => '{1} Er was één validatiefout.|[2,*] Er waren :count validatiefouten.',
+        'invalid' => 'Er trad een validatiefout op.',
     ],
 
     'date' => [

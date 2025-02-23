@@ -72,7 +72,7 @@ return [
                 'description' => 'Sie haben noch keine Bilder.',
             ],
         ],
-        'invalid' => '{1} Es gab einen Validierungsfehler.|[2,*] Es gab :count Validierungsfehler.',
+        'invalid' => 'Es gab einen Validierungsfehler.',
     ],
 
     'date' => [

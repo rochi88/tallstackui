@@ -72,7 +72,7 @@ return [
                 'description' => 'Bạn chưa có bất kỳ hình ảnh nào.',
             ],
         ],
-        'invalid' => '{1} Có một lỗi xác thực.|[2,*] Có :count lỗi xác thực.',
+        'invalid' => 'Đã xảy ra lỗi xác thực.',
     ],
 
     'date' => [

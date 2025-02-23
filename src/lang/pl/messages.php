@@ -67,7 +67,7 @@ return [
                 'description' => 'Nie posiadasz jeszcze żadnego obrazka.',
             ],
         ],
-        'invalid' => '{1} Wystąpił jeden błąd walidacji.|[2,*] Wystąpiło :count błędów walidacji.',
+        'invalid' => 'Wystąpił błąd walidacji.',
     ],
 
     'date' => [

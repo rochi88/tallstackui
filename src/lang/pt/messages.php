@@ -72,7 +72,7 @@ return [
                 'description' => 'Ainda não possui nenhuma imagem.',
             ],
         ],
-        'invalid' => '{1} Houve um erro de validação.|[2,*] Houve :count erros de validação.',
+        'invalid' => 'Houve algum erro de validação.',
     ],
 
     'date' => [
