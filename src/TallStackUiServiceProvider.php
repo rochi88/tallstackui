@@ -20,7 +20,7 @@ class TallStackUiServiceProvider extends ServiceProvider
 {
     public function boot(): void
     {
-        $this->registerConfig();
+        $this->registerPublishable();
 
         $this->registerComponents();
 
@@ -33,6 +33,8 @@ class TallStackUiServiceProvider extends ServiceProvider
 
     public function register(): void
     {
+        $this->registerConfig();
+
         $this->app->singleton('TallStackUi', TallStackUi::class);
     }
 
@@ -76,12 +78,20 @@ class TallStackUiServiceProvider extends ServiceProvider
     protected function registerConfig(): void
     {
         $this->loadViewsFrom(__DIR__.'/resources/views', 'tallstack-ui');
-        $this->mergeConfigFrom(__DIR__.'/config.php', 'tallstackui');
-        $this->loadRoutesFrom(__DIR__.'/routes.php');
-        $this->loadTranslationsFrom(__DIR__.'/lang', 'tallstack-ui');
 
+        $this->mergeConfigFrom(__DIR__.'/config.php', 'tallstackui');
+
+        $this->loadRoutesFrom(__DIR__.'/routes.php');
+
+        $this->loadTranslationsFrom(__DIR__.'/lang', 'tallstack-ui');
+    }
+
+    protected function registerPublishable(): void
+    {
         $this->publishes([__DIR__.'/config.php' => config_path('tallstackui.php')], 'tallstackui.config');
+
         $this->publishes([__DIR__.'/lang' => lang_path('vendor/tallstack-ui')], 'tallstackui.lang');
+
         $this->publishes([__DIR__.'/resources/views' => resource_path('views/vendor/tallstack-ui')], 'tallstackui.views');
     }
 }
