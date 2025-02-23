@@ -42,7 +42,7 @@
         </x-dynamic-component>
          @if ($invalid['status'])
             <span class="{{ $personalize['invalid'] }}">
-                {{ trans_choice('tallstack-ui::messages.upload.invalid', $invalid['quantity'], ['count' => $invalid['quantity']]) }}
+                {{ trans('tallstack-ui::messages.upload.invalid') }}
             </span>
          @endif
     @if ($preview)
