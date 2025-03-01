@@ -74,7 +74,7 @@
                           :class="$personalize['floating.class']"
                           dusk="tallstackui_upload_floating">
          @if (!$static)
-         <div @class(['flex flex-col w-full items-center justify-center', 'mb-2' => $footer->isNotEmpty()])>
+         <div @class(['flex flex-col w-full items-center justify-center', 'mb-2' => $footer?->isNotEmpty()])>
              <div class="{{ $personalize['placeholder.wrapper'] }}" :class="{ 'bg-primary-100': dragging }">
                  <div class="{{ $personalize['placeholder.icon.wrapper'] }}">
                      <x-dynamic-component :component="TallStackUi::prefix('icon')"
@@ -104,12 +104,12 @@
              </div>
          </div>
          @endif
-         <div @class([$personalize['error.wrapper'], 'mb-2' => $footer->isNotEmpty()]) x-show="@js($error) && error">
+         <div @class([$personalize['error.wrapper'], 'mb-2' => $footer?->isNotEmpty()]) x-show="@js($error) && error">
              <p class="{{ $personalize['error.message'] }}" x-text="warning"></p>
          </div>
          <div x-show="uploading"
               role="progressbar"
-              @class([$personalize['upload.wrapper'], 'mb-2' => $footer->isNotEmpty()])>
+              @class([$personalize['upload.wrapper'], 'mb-2' => $footer?->isNotEmpty()])>
              <div class="{{ $personalize['upload.progress'] }}" x-bind:style="'width: ' + progress + '%'"></div>
          </div>
          @if ($value)
@@ -171,7 +171,7 @@
                  </p>
              </div>
          @endif
-         @if ($footer->isNotEmpty())
+         @if ($footer?->isNotEmpty())
              @unless ($footer->attributes->has('when-uploaded') && !$value)
                  <x-slot:footer>
                      {{ $footer }}
