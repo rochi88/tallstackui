@@ -60,9 +60,9 @@ trait Setup
                 return [
                     $label => $item[$label],
                     $value => $item[$value],
-                    $image ?? 'image' => current(array_intersect_key($item, $images)) ?: null,
+                    $image ?? 'image' => $item[$image] ?? current(array_intersect_key($item, $images)) ?: null,
                     'disabled' => $item['disabled'] ?? false,
-                    $description ?? 'description' => $description ? $item[$description] : (current(array_intersect_key($item, $descriptions)) ?: null),
+                    $description ?? 'description' => $item[$description] ?? (current(array_intersect_key($item, $descriptions)) ?: null),
                 ];
             })
             ->toArray();
