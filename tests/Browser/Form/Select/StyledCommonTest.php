@@ -356,6 +356,8 @@ class StyledCommonTest extends BrowserTestCase
                                      ]"
                                      select="label:name|value:id|description:text">
                     </x-select.styled>
+
+                    <x-button dusk="sync" wire:click="sync">Sync</x-button>
                 </div>
                 HTML;
             }
