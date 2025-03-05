@@ -27,10 +27,10 @@ class StyledCommonTest extends BrowserTestCase
                                      label="Select"
                                      hint="Select"
                                      :options="[
-                                        ['name' => 'foo', 'id' => 'foo', 'text' => 'PHP'],
-                                        ['name' => 'bar', 'id' => 'bar', 'text' => 'JS'],
+                                        ['name' => 'foo', 'id' => 'foo', 'text' => 'PHP', 'some_picture' => 'https://cdn.dribbble.com/users/17793/screenshots/16101765/media/beca221aaebf1d3ea7684ce067bc16e5.png'],
+                                        ['name' => 'bar', 'id' => 'bar', 'text' => 'JS', 'some_picture' => null],
                                      ]"
-                                     select="label:name|value:id|description:text">
+                                     select="label:name|value:id|description:text|image:some_picture">
                     </x-select.styled>
 
                     <x-button dusk="sync" wire:click="sync">Sync</x-button>
@@ -50,13 +50,16 @@ class StyledCommonTest extends BrowserTestCase
             ->assertDontSee('JS')
             ->click('@tallstackui_select_open_close')
             ->waitForText(['foo', 'bar', 'PHP', 'JS'])
+            ->assertVisible('@tallstackui_select_options')
             ->assertSee('foo')
             ->assertSee('bar')
             ->assertSee('PHP')
             ->assertSee('JS')
+            ->assertVisible('img[src="https://cdn.dribbble.com/users/17793/screenshots/16101765/media/beca221aaebf1d3ea7684ce067bc16e5.png"]')
             ->clickAtXPath('/html/body/div[3]/div/div[2]/div/ul/li[1]')
             ->click('@sync')
             ->waitForText('foo')
+            ->assertVisible('img[src="https://cdn.dribbble.com/users/17793/screenshots/16101765/media/beca221aaebf1d3ea7684ce067bc16e5.png"]')
             ->assertDontSee('bar');
     }
 
