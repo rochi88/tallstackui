@@ -20,17 +20,10 @@ class IndexTest extends BrowserTestCase
                 <div x-data="{image: 'https://cdn.dribbble.com/users/17793/screenshots/16101765/media/beca221aaebf1d3ea7684ce067bc16e5.png'}">
                     <x-avatar image x-bind:src="image" />
                 </div>
-            HTML;
+                HTML;
             }
         })
             ->waitFor('img[src="https://cdn.dribbble.com/users/17793/screenshots/16101765/media/beca221aaebf1d3ea7684ce067bc16e5.png"]')
             ->assertVisible('img[src="https://cdn.dribbble.com/users/17793/screenshots/16101765/media/beca221aaebf1d3ea7684ce067bc16e5.png"]');
-    }
-
-    protected function setUp(): void
-    {
-        parent::setUp();
-
-        $this->skipOnGitHubActions('This test is not compatible with GitHub Actions');
     }
 }
