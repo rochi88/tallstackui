@@ -37,6 +37,7 @@ trait Setup
         // happens to the $value, is the name of the value and not the value itself.
         $label = $select['label'] ?? 'label';
         $value = $select['value'] ?? 'value';
+
         $description = $select['description'] ?? null;
         $image = $select['image'] ?? null;
 
@@ -67,6 +68,11 @@ trait Setup
             })
             ->toArray();
 
-        $this->selectable = ['label' => $label, 'value' => $value, 'description' => $description ?? 'description', 'image' => $image ?? 'image'];
+        $this->selectable = [
+            'label' => $label,
+            'value' => $value,
+            'description' => $description ?? 'description',
+            'image' => $image ?? 'image',
+        ];
     }
 }
