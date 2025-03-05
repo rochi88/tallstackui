@@ -11,6 +11,56 @@ use Tests\Browser\BrowserTestCase;
 class StyledCommonTest extends BrowserTestCase
 {
     #[Test]
+    public function can_change_selectable(): void
+    {
+        Livewire::visit(new class extends Component
+        {
+            public ?string $string = null;
+
+            public function render(): string
+            {
+                return <<<'HTML'
+                <div>
+                    {{ $string }}
+
+                    <x-select.styled wire:model="string"
+                                     label="Select"
+                                     hint="Select"
+                                     :options="[
+                                        ['name' => 'foo', 'id' => 'foo', 'text' => 'PHP'],
+                                        ['name' => 'bar', 'id' => 'bar', 'text' => 'JS'],
+                                     ]"
+                                     select="label:name|value:id|description:text">
+                    </x-select.styled>
+
+                    <x-button dusk="sync" wire:click="sync">Sync</x-button>
+                </div>
+                HTML;
+            }
+
+            public function sync(): void
+            {
+                // ...
+            }
+        })
+            ->assertSee('Select an option')
+            ->assertDontSee('bar')
+            ->assertDontSee('foo')
+            ->assertDontSee('PHP')
+            ->assertDontSee('JS')
+            ->click('@tallstackui_select_open_close')
+            ->waitForText(['foo', 'bar', 'PHP', 'JS'])
+            ->assertSee('foo')
+            ->assertSee('bar')
+            ->assertSee('PHP')
+            ->assertSee('JS')
+            ->clickAtXPath('/html/body/div[3]/div/div[2]/div/ul/li[1]')
+            ->click('@sync')
+            ->waitForText('foo')
+            ->assertDontSee('bar');
+    }
+
+    #[Test]
     public function can_clear(): void
     {
         Livewire::visit(StyledComponent_Common::class)
@@ -333,57 +383,6 @@ class StyledCommonTest extends BrowserTestCase
             ->assertDontSee('bar')
             ->assertDontSee('JS');
     }
-
-    #[Test]
-    public function can_change_selectable(): void
-    {
-        Livewire::visit(new class extends Component
-        {
-            public ?string $string = null;
-
-            public function render(): string
-            {
-                return <<<'HTML'
-                <div>
-                    {{ $string }}
-
-                    <x-select.styled wire:model="string"
-                                     label="Select"
-                                     hint="Select"
-                                     :options="[
-                                        ['name' => 'foo', 'id' => 'foo', 'text' => 'PHP'],
-                                        ['name' => 'bar', 'id' => 'bar', 'text' => 'JS'],
-                                     ]"
-                                     select="label:name|value:id|description:text">
-                    </x-select.styled>
-
-                    <x-button dusk="sync" wire:click="sync">Sync</x-button>
-                </div>
-                HTML;
-            }
-
-            public function sync(): void
-            {
-                // ...
-            }
-        })
-            ->assertSee('Select an option')
-            ->assertDontSee('bar')
-            ->assertDontSee('foo')
-            ->assertDontSee('PHP')
-            ->assertDontSee('JS')
-            ->click('@tallstackui_select_open_close')
-            ->waitForText(['foo', 'bar', 'PHP', 'JS'])
-            ->assertSee('foo')
-            ->assertSee('bar')
-            ->assertSee('PHP')
-            ->assertSee('JS')
-            ->clickAtXPath('/html/body/div[3]/div/div[2]/div/ul/li[1]')
-            ->click('@sync')
-            ->waitForText('foo')
-            ->assertDontSee('bar');
-    }
-
 
     #[Test]
     public function can_select(): void
