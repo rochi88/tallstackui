@@ -232,7 +232,7 @@ export default (
 
       this.model = this.dimensional ? option[this.selectable.value] : option;
       this.placeholder = this.dimensional ? option[this.selectable.label] : option;
-      this.image = option.image ?? null;
+      this.image = option[this.selectable.image] ?? null;
     }
 
     this.show = this.quantity === this.available?.length ? false : this.multiple;
@@ -407,7 +407,7 @@ export default (
       this.placeholder = this.dimensional ?
           this.selects[0]?.[this.selectable.label] ?? placeholder :
           this.selects[0] ?? placeholder;
-      this.image = this.selects[0]?.image ?? null;
+      this.image = this.selects[0]?.[this.selectable.image] ?? null;
     } else {
       this.selects = [];
     }
@@ -532,8 +532,8 @@ export default (
             option[selectable.label].toString().toLowerCase() :
             option.toString().toLowerCase());
 
-        const description = option.description ?
-            this.normalize(option.description.toString().toLowerCase()) :
+        const description = option[this.selectable.description] ?
+            this.normalize(option[this.selectable.description].toString().toLowerCase()) :
             null;
 
         return this.dimensional ?

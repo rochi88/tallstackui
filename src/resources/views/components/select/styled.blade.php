@@ -134,7 +134,7 @@
                 @endif
                 @if ($grouped)
                 <template x-for="(option, index) in available" :key="index">
-                    <li> 
+                    <li>
                         <div class="{{ $personalize['box.list.grouped.wrapper'] }}">
                             <div class="{{ $personalize['box.list.grouped.options'] }}">
                                 <div class="{{ $personalize['box.list.grouped.base'] }}">
@@ -154,10 +154,10 @@
                                 class="{{ $personalize['box.list.item.wrapper'] }}">
                                 <div class="{{ $personalize['box.list.item.grouped'] }}">
                                     <div class="{{ $personalize['box.list.item.base'] }}">
-                                        <img class="{{ $personalize['box.list.item.image'] }}" x-bind:src="item.image" x-show="item.image">
+                                        <img class="{{ $personalize['box.list.item.image'] }}" x-bind:src="item[selectable.image]" x-show="item[selectable.description]">
                                         <div class="{{ $personalize['box.list.item.description.wrapper'] }}">
                                             <span x-text="item[selectable.label] ?? item"></span>
-                                            <span class="{{ $personalize['box.list.item.description.text'] }}" x-show="item.description" x-text="item.description"></span>
+                                            <span class="{{ $personalize['box.list.item.description.text'] }}" x-show="item[selectable.description]" x-text="item[selectable.description]"></span>
                                         </div>
                                     </div>
                                     <div class="{{ $personalize['box.list.item.check'] }}">
@@ -181,10 +181,10 @@
                         class="{{ $personalize['box.list.item.wrapper'] }}">
                         <div class="{{ $personalize['box.list.item.options'] }}">
                             <div class="{{ $personalize['box.list.item.base'] }}">
-                                <img class="{{ $personalize['box.list.item.image'] }}" x-bind:src="option.image" x-show="option.image">
+                                <img class="{{ $personalize['box.list.item.image'] }}" x-bind:src="option[selectable.image]" x-show="option[selectable.image]">
                                 <div class="{{ $personalize['box.list.item.description.wrapper'] }}">
                                     <span x-text="option[selectable.label] ?? option"></span>
-                                    <span class="{{ $personalize['box.list.item.description.text'] }}" x-show="option.description" x-text="option.description"></span>
+                                    <span class="{{ $personalize['box.list.item.description.text'] }}" x-show="option[selectable.description]" x-text="option[selectable.description]"></span>
                                 </div>
                             </div>
                             <div class="{{ $personalize['box.list.item.check'] }}">

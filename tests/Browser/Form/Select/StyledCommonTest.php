@@ -11,6 +11,59 @@ use Tests\Browser\BrowserTestCase;
 class StyledCommonTest extends BrowserTestCase
 {
     #[Test]
+    public function can_change_selectable(): void
+    {
+        Livewire::visit(new class extends Component
+        {
+            public ?string $string = null;
+
+            public function render(): string
+            {
+                return <<<'HTML'
+                <div>
+                    {{ $string }}
+
+                    <x-select.styled wire:model="string"
+                                     label="Select"
+                                     hint="Select"
+                                     :options="[
+                                        ['name' => 'foo', 'id' => 'foo', 'text' => 'PHP', 'some_picture' => 'https://cdn.dribbble.com/users/17793/screenshots/16101765/media/beca221aaebf1d3ea7684ce067bc16e5.png'],
+                                        ['name' => 'bar', 'id' => 'bar', 'text' => 'JS', 'some_picture' => null],
+                                     ]"
+                                     select="label:name|value:id|description:text|image:some_picture">
+                    </x-select.styled>
+
+                    <x-button dusk="sync" wire:click="sync">Sync</x-button>
+                </div>
+                HTML;
+            }
+
+            public function sync(): void
+            {
+                // ...
+            }
+        })
+            ->assertSee('Select an option')
+            ->assertDontSee('bar')
+            ->assertDontSee('foo')
+            ->assertDontSee('PHP')
+            ->assertDontSee('JS')
+            ->click('@tallstackui_select_open_close')
+            ->waitForText(['foo', 'bar', 'PHP', 'JS'])
+            ->assertVisible('@tallstackui_select_options')
+            ->assertSee('foo')
+            ->assertSee('bar')
+            ->assertSee('PHP')
+            ->assertSee('JS')
+            ->assertVisible('img[src="https://cdn.dribbble.com/users/17793/screenshots/16101765/media/beca221aaebf1d3ea7684ce067bc16e5.png"]')
+            ->clickAtXPath('/html/body/div[3]/div/div[2]/div/ul/li[1]')
+            ->click('@sync')
+            ->waitForText('foo')
+            ->assertVisible('img[src="https://cdn.dribbble.com/users/17793/screenshots/16101765/media/beca221aaebf1d3ea7684ce067bc16e5.png"]')
+            ->assertDontSee('bar');
+    }
+
+    #[Test]
     public function can_clear(): void
     {
         Livewire::visit(StyledComponent_Common::class)
@@ -46,15 +99,15 @@ class StyledCommonTest extends BrowserTestCase
                 return <<<'HTML'
                 <div>
                     <p dusk="options">@json($options)</p>
-                    
+
                     @if ($select)
                         <p dusk="select">Select</p>
                     @endif
-                    
+
                     @if ($remove)
                         <p dusk="remove">Remove</p>
                     @endif
-                    
+
                     @if ($erase)
                         <p dusk="erase">Erase</p>
                     @endif
