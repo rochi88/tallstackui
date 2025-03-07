@@ -23,12 +23,21 @@ export default (model, min, max, delay, step) => ({
    */
   increment() {
     const update = (value) => {
-      this.$refs.input.stepUp(value);
+      const inputStep = parseFloat(this.$refs.input.step) || 1;
+      const stepCount = value / inputStep;
+
+      if (!Number.isInteger(stepCount)) {
+        const currentValue = parseFloat(this.$refs.input.value) || 0;
+        this.$refs.input.value = (currentValue + value).toFixed(2);
+      } else {
+        this.$refs.input.stepUp(stepCount);
+      }
+
       this.$refs.input.dispatchEvent(new Event('change'));
       this.update();
     };
 
-    const current = this.model !== null ? parseInt(this.model, 10) : null;
+    const current = this.model !== null ? parseFloat(this.model) : null;
     const max = this.max;
 
     if (current !== null && max !== null && current >= max) {
@@ -66,12 +75,21 @@ export default (model, min, max, delay, step) => ({
    */
   decrement() {
     const update = (value) => {
-      this.$refs.input.stepDown(value);
+      const inputStep = parseFloat(this.$refs.input.step) || 1;
+      const stepCount = value / inputStep;
+
+      if (!Number.isInteger(stepCount)) {
+        const currentValue = parseFloat(this.$refs.input.value) || 0;
+        this.$refs.input.value = (currentValue - value).toFixed(2);
+      } else {
+        this.$refs.input.stepDown(stepCount);
+      }
+
       this.$refs.input.dispatchEvent(new Event('change'));
       this.update();
     };
 
-    const current = this.model !== null ? parseInt(this.model, 10) : null;
+    const current = this.model !== null ? parseFloat(this.model) : null;
     const min = this.min;
 
     if (current !== null && min !== null && current <= min) {
