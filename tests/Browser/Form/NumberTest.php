@@ -21,7 +21,7 @@ class NumberTest extends BrowserTestCase
                 return <<<'HTML'
                 <div>
                     <p dusk="decreased">{{ $quantity }}</p>
-                    
+
                     <x-number wire:model="quantity" />
                     <x-button dusk="sync" wire:click="sync">Save</x-button>
                 </div>
@@ -53,7 +53,7 @@ class NumberTest extends BrowserTestCase
                 return <<<'HTML'
                 <div>
                     <p dusk="decreased">{{ $quantity }}</p>
-                    
+
                     <x-number wire:model="quantity" step="5" />
                     <x-button dusk="sync" wire:click="sync">Save</x-button>
                 </div>
@@ -85,7 +85,7 @@ class NumberTest extends BrowserTestCase
                 return <<<'HTML'
                 <div>
                     <p dusk="quantity">{{ $quantity }}</p>
-                
+
                     <x-number label="Quantity" wire:model.live="quantity" />
                 </div>
                 HTML;
@@ -121,7 +121,7 @@ class NumberTest extends BrowserTestCase
                 return <<<'HTML'
                 <div>
                     <p dusk="decreased">{{ $quantity }}</p>
-                    
+
                     <x-number label="Quantity" min="5" wire:model.live="quantity" delay="1" />
                 </div>
                 HTML;
@@ -144,7 +144,7 @@ class NumberTest extends BrowserTestCase
                 return <<<'HTML'
                 <div>
                     <p dusk="decreased">{{ $quantity }}</p>
-                    
+
                     <x-number wire:model.live="quantity" />
                 </div>
                 HTML;
@@ -167,6 +167,39 @@ class NumberTest extends BrowserTestCase
     }
 
     #[Test]
+    public function can_have_float_step(): void
+    {
+        Livewire::visit(new class extends Component
+        {
+            public float $quantity = 20.00;
+
+            public function render(): string
+            {
+                return <<<'HTML'
+                <div>
+                    <p dusk="decreased">{{ $quantity }}</p>
+
+                    <x-number wire:model="quantity" step="0.01" />
+
+                    <x-button dusk="sync" wire:click="sync">Save</x-button>
+                </div>
+                HTML;
+            }
+
+            public function sync(): void
+            {
+                //
+            }
+        })
+            ->assertSee('Save')
+            ->click('@tallstackui_form_number_decrement')
+            ->click('@tallstackui_form_number_decrement')
+            ->click('@tallstackui_form_number_increment')
+            ->click('@sync')
+            ->waitForTextIn('@decreased', '19.99');
+    }
+
+    #[Test]
     public function can_increase(): void
     {
         Livewire::visit(new class extends Component
@@ -178,7 +211,7 @@ class NumberTest extends BrowserTestCase
                 return <<<'HTML'
                 <div>
                     <p dusk="increased">{{ $quantity }}</p>
-                    
+
                     <x-number wire:model="quantity" />
                     <x-button dusk="sync" wire:click="sync">Save</x-button>
                 </div>
@@ -210,7 +243,7 @@ class NumberTest extends BrowserTestCase
                 return <<<'HTML'
                 <div>
                     <p dusk="increased">{{ $quantity }}</p>
-                    
+
                     <x-number label="Quantity" wire:change="sync" wire:model="quantity" />
                 </div>
                 HTML;
@@ -240,7 +273,7 @@ class NumberTest extends BrowserTestCase
                 return <<<'HTML'
                 <div>
                     <p dusk="increased">{{ $quantity }}</p>
-                    
+
                     <x-number wire:model="quantity" step="5" />
                     <x-button dusk="sync" wire:click="sync">Save</x-button>
                 </div>
@@ -272,7 +305,7 @@ class NumberTest extends BrowserTestCase
                 return <<<'HTML'
                 <div>
                     <p dusk="increased">{{ $quantity }}</p>
-                    
+
                     <x-number label="Quantity" wire:model.live="quantity" delay="1" max="10" />
                 </div>
                 HTML;
@@ -295,7 +328,7 @@ class NumberTest extends BrowserTestCase
                 return <<<'HTML'
                 <div>
                     <p dusk="increased">{{ $quantity }}</p>
-                    
+
                     <x-number wire:model.live="quantity" />
                 </div>
                 HTML;
@@ -329,9 +362,9 @@ class NumberTest extends BrowserTestCase
                 return <<<'HTML'
                 <div>
                     <p dusk="decreased">{{ $quantity }}</p>
-                    
+
                     <x-number wire:model="quantity" min="2" />
-                    
+
                     <x-button dusk="sync" wire:click="sync">Save</x-button>
                 </div>
                 HTML;
@@ -361,7 +394,7 @@ class NumberTest extends BrowserTestCase
                 return <<<'HTML'
                 <div>
                     <p dusk="quantity">{{ $quantity }}</p>
-                
+
                     <x-number label="Quantity" wire:model.live="quantity" min="0" />
                 </div>
                 HTML;
@@ -394,9 +427,9 @@ class NumberTest extends BrowserTestCase
                 return <<<'HTML'
                 <div>
                     <p dusk="increased">{{ $quantity }}</p>
-                    
+
                     <x-number wire:model="quantity" max="10" />
-                    
+
                     <x-button dusk="sync" wire:click="sync">Save</x-button>
                 </div>
                 HTML;
@@ -426,9 +459,9 @@ class NumberTest extends BrowserTestCase
                 return <<<'HTML'
                 <div>
                     <p dusk="quantity">{{ $quantity }}</p>
-                    
+
                     <x-number wire:model="quantity" min="0" max="3" />
-                    
+
                     <x-button dusk="sync" wire:click="sync">Save</x-button>
                 </div>
                 HTML;

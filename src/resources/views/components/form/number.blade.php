@@ -16,6 +16,7 @@
                inputmode="numeric"
                @if ($min) min="{{ $min }}" @endif
                @if ($max) max="{{ $max }}" @endif
+               @if ($step) step="{{ $step }}" @endif
                @if ($selectable) x-on:keydown="$event.preventDefault()" @endif
                {{ $attributes->class([
                     $personalize['input.base'],
