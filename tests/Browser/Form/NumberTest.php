@@ -171,7 +171,7 @@ class NumberTest extends BrowserTestCase
     {
         Livewire::visit(new class extends Component
         {
-            public float|int $quantity = 20;
+            public float $quantity = 20.00;
 
             public function render(): string
             {
@@ -180,6 +180,7 @@ class NumberTest extends BrowserTestCase
                     <p dusk="decreased">{{ $quantity }}</p>
 
                     <x-number wire:model="quantity" step="0.01" />
+
                     <x-button dusk="sync" wire:click="sync">Save</x-button>
                 </div>
                 HTML;

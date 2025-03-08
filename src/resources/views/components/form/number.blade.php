@@ -1,6 +1,7 @@
 @php
     $personalize = $classes();
 @endphp
+
 <x-dynamic-component :component="TallStackUi::prefix('wrapper.input')" :$id :$property :$error :$label :$hint :$invalidate>
     <div @class([
             $personalize['input.wrapper'],
